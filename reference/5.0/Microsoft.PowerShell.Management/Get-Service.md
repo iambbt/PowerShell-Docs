@@ -203,6 +203,18 @@ PS C:\> "WinRM" | Get-Service
 This command gets the WinRM service on the local computer.
 This example shows that you can pipe a service name string (enclosed in quotation marks) to **Get-Service**.
 
+### Example 12: Get list of services and loop through them and read each service's properties
+```
+get-service -Name "SQLget-service -Name "SQL*" | ForEach-Object {    
+    $Service = $_.Name    
+    $Status = $_.Status    
+    if ( $Status -eq "Running" ){        
+        Stop-service $Service        
+        Start-service $Service        
+    }
+}
+```
+This command gets list of services that starts with 'SQL', loop through them one-by-one and if the service is running (or active), stop and starts them.
 ## PARAMETERS
 
 ### -ComputerName
